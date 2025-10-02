@@ -1,18 +1,52 @@
-function encodePassword(password, encodeFunction) {}
+let res = prompt("donne un truc");
+
+function encodePassword(password, encodeFunction) {
+	return encodeFunction(password);
+}
 
 function encodeRot8(password) {
-	for (let i = encodeFunction; (i = "${}"); i + 8) {
-		return password + i;
+	let result = "";
+
+	for (let i = 0; i < password.length; i++) {
+		const char = password[i];
+		const code = char.charCodeAt(0);
+
+		if (code >= 97 && code <= 122) {
+			const newCode = ((code - 97 + 8) % 26) + 97;
+			result += String.fromCharCode(newCode);
+		} else if (code >= 65 && code <= 90) {
+			const newCode = ((code - 65 + 8) % 26) + 65;
+			result += String.fromCharCode(newCode);
+		} else {
+			result += char;
+		}
 	}
+
+	return result;
 }
 
 function encodeRot16(password) {
-	for (let i = encodeFunction; (i = "${}"); i + 16) {
-		return password + i;
+	let result = "";
+
+	for (let i = 0; i < password.length; i++) {
+		const char = password[i];
+		const code = char.charCodeAt(0);
+
+		if (code >= 97 && code <= 122) {
+			const newCode = ((code - 97 + 16) % 26) + 97;
+			result += String.fromCharCode(newCode);
+		} else if (code >= 65 && code <= 90) {
+			const newCode = ((code - 65 + 16) % 26) + 65;
+			result += String.fromCharCode(newCode);
+		} else {
+			result += char;
+		}
 	}
+
+	return result;
 }
 
-console.log(encodePassword("abc", encodeRot8));
-console.log(encodePassword("abc", encodeRot16));
-console.log(encodePassword("xyz", encodeRot8));
-console.log(encodePassword("xyz", encodeRot16));
+console.log(encodePassword(res, encodeRot8));
+console.log(encodePassword(res, encodeRot16));
+console.log(encodePassword(res, encodeRot8));
+console.log(encodePassword(res, encodeRot16));
